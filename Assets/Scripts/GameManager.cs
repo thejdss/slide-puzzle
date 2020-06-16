@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int winNumber;
+    public int winNumber; // total number of buttons
+    public int minimumDistance = 80;
     public Text winText;
     public GameObject restartButton;
 
@@ -16,7 +17,9 @@ public class GameManager : MonoBehaviour
         int xPos = Mathf.Abs((int)me.myRect.position.x - (int)buttonEmpty.myRect.position.x);
         int yPos = Mathf.Abs((int)me.myRect.position.y - (int)buttonEmpty.myRect.position.y);
 
-        if ((xPos + yPos) <= 55)
+        Debug.LogFormat("Minimum distance = {0}", (xPos + yPos));
+
+        if ((xPos + yPos) <= minimumDistance)
         {
             int btnI = me.i, btnEmpt = buttonEmpty.i; 
             Vector2 buttonAux = new Vector2(buttonEmpty.myRect.position.x, buttonEmpty.myRect.position.y);
