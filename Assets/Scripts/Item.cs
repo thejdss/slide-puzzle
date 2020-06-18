@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ButtonP : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public int i;
     public RectTransform myRect;

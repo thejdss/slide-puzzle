@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -6,20 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public int winNumber; // total number of buttons
     public int minimumDistance = 80;
+    public int columnNumber; // number of columns (in Grid Layout Group component)
     public Text winText;
-    public GameObject restartButton;
 
-    public ButtonP buttonEmpty;
-    public ButtonP[] buttons;
+    public Item buttonEmpty;
+    public Item[] buttons;
     
-    public void ChangePos(ButtonP me)
+    public void ChangePos(Item me)
     {
-        int xPos = Mathf.Abs((int)me.myRect.position.x - (int)buttonEmpty.myRect.position.x);
-        int yPos = Mathf.Abs((int)me.myRect.position.y - (int)buttonEmpty.myRect.position.y);
-
-        Debug.LogFormat("Minimum distance = {0}", (xPos + yPos));
-
-        if ((xPos + yPos) <= minimumDistance)
+        if (isPosValid(me.myRect.position))
         {
             int btnI = me.i, btnEmpt = buttonEmpty.i; 
             Vector2 buttonAux = new Vector2(buttonEmpty.myRect.position.x, buttonEmpty.myRect.position.y);
@@ -37,14 +33,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Sort(int times)
+    public bool isPosValid(Vector2 pos)
     {
-        for (int i = 0; i < times; i++)
-        {
-            int rand = Random.Range(0, buttons.Length);
+        int xPos = Mathf.Abs((int)pos.x - (int)buttonEmpty.myRect.position.x);
+        int yPos = Mathf.Abs((int)pos.y - (int)buttonEmpty.myRect.position.y);
 
-            ChangePosInSort(buttons[rand]);
+        if ((xPos + yPos) <= minimumDistance)
+        {
+            return true;
         }
+
+        return false;
     }
 
     private void CheckWin()
@@ -69,27 +68,6 @@ public class GameManager : MonoBehaviour
         if (count.Equals(winNumber))
         {
             winText.text = "You Win !!";
-        }
-    }
-
-    private void ChangePosInSort(ButtonP me)
-    {
-        int xPos = Mathf.Abs((int)me.myRect.position.x - (int)buttonEmpty.myRect.position.x);
-        int yPos = Mathf.Abs((int)me.myRect.position.y - (int)buttonEmpty.myRect.position.y);
-
-        if ((xPos + yPos) <= 55)
-        {
-            int btnI = me.i, btnEmpt = buttonEmpty.i;
-            Vector2 buttonAux = new Vector2(buttonEmpty.myRect.position.x, buttonEmpty.myRect.position.y);
-
-            buttons[me.i] = buttonEmpty;
-            buttons[buttonEmpty.i] = me;
-
-            buttons[btnEmpt].i = btnEmpt;
-            buttonEmpty.i = btnI;
-
-            buttonEmpty.myRect.position = me.myRect.position;
-            me.myRect.position = buttonAux;
         }
     }
 

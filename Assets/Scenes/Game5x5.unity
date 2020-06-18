@@ -1798,6 +1798,7 @@ GameObject:
   m_Component:
   - component: {fileID: 694884223}
   - component: {fileID: 694884222}
+  - component: {fileID: 694884224}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1819,8 +1820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winNumber: 24
   minimumDistance: 80
+  columnNumber: 5
   winText: {fileID: 1905490217}
-  restartButton: {fileID: 875062125}
   buttonEmpty: {fileID: 1267359284}
   buttons:
   - {fileID: 480353573}
@@ -1862,6 +1863,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694884224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694884221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13edf5431d7f6c94e892a551050aae72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 694884222}
 --- !u!1 &698884040
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,7 +3606,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 694884222}
+      - m_Target: {fileID: 694884224}
         m_MethodName: Sort
         m_Mode: 3
         m_Arguments:
